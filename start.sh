@@ -11,6 +11,12 @@ fi
 wget $URL_FILE_TO_IMPORT
 file=$(basename $URL_FILE_TO_IMPORT)
 
+function initializeDatabase() {
+  cockroach sql --insecure \
+  --host osm-seed-cockroach-cockroachdb-public \
+  --execute "CREATE DATABASE IF NOT EXISTS openstreetmap"
+}
+
 function importData () {
     # In case the import file is a PBF
     if [ ${file: -4} == ".pbf" ]; then
