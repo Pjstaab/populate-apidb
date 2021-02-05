@@ -28,15 +28,5 @@ Get the files form :
 
 ```
     cd populate-apidb/
-    docker network create osm-seed_default
     docker build -t osmseed-populate-apidb:v1 .
-```
-
-#### Running the container
-
-```
-  docker run \
-  --env-file ./../.env \
-  --network osm-seed_default \
-  -t osmseed-populate-apidb:v1
 ```
