@@ -22,14 +22,14 @@ function initializeDatabase() {
 }
 
 function importData () {
-      pbfFile=$file
-      echo "Importing $pbfFile ..."
-      osm2pgsql \
-      -c $pbfFile \
-      -H $POSTGRES_HOST \
-      -P $POSTGRES_PORT \
-      -d $POSTGRES_DB \
-      -U $POSTGRES_USER \
+  pbfFile=$file
+  echo "Importing $pbfFile ..."
+  osm2pgsql \
+  -c $pbfFile \
+  -H $POSTGRES_HOST \
+  -P $POSTGRES_PORT \
+  -d $POSTGRES_DB \
+  -U $POSTGRES_USER
 }
 
 flag=true
