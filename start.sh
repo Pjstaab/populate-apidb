@@ -35,6 +35,7 @@ function importData () {
 
 flag=true
 while "$flag" = true; do
+    sleep 360000
     curl "http://$POSTGRES_HOST:8080/health?ready=1" || continue
     # Change flag to false to stop ping the DB
     flag=false
