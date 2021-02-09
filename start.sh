@@ -10,6 +10,7 @@ fi
 # Get the data
 wget $URL_FILE_TO_IMPORT
 file=$(basename $URL_FILE_TO_IMPORT)
+echo "Downloaded File"
 
 function initializeDatabase() {
   cockroach sql --insecure \
@@ -18,7 +19,7 @@ function initializeDatabase() {
 
   cockroach sql --insecure \
   --host $POSTGRES_HOST \
-  --execute "SET CLUSTER SETTING sql.conn.max_read_buffer_message_size=64MiB"
+  --execute "SET CLUSTER SETTING sql.conn.max_read_buffer_message_size = '64MiB'"
 }
 
 function importData () {
@@ -34,7 +35,7 @@ function importData () {
 
 flag=true
 while "$flag" = true; do
-    pg_isready -h $POSTGRES_HOST -p 26257 -U $POSTGRES_USER >/dev/null 2>&2 || continue
+    curl "http://$POSTGRES_HOST:8080/health?ready=1" || continue
     # Change flag to false to stop ping the DB
     flag=false
     initializeDatabase
